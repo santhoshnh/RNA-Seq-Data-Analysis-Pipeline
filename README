@@ -1,0 +1,54 @@
+Pipeline Overview
+
+The script executes the following major tasks:
+
+    Data Quality Assessment: Utilizes FastQC to assess the quality of raw FASTQ reads.
+    Quality and Adapter Trimming: Uses fastp to trim the reads and remove adapters.
+    Indexing Reference Genome: Builds an index for the reference genome using HISAT2.
+    Read Mapping: Maps the trimmed reads to the reference genome with HISAT2, including an option to filter out multi-mapped reads.
+    Processing Alignments: Converts SAM files to BAM format, sorts them, and indexes the sorted BAM files using Samtools.
+    Read Counting: Utilizes featureCounts to generate a count matrix from the aligned BAM files.
+    Differential Expression Analysis: Runs a separate R script (DESeq2.r) to analyze differential expression based on the generated count matrix.
+
+Prerequisites
+
+    Software Requirements:
+        FastQC
+        fastp
+        HISAT2
+        Samtools
+        featureCounts
+        R and the DESeq2 package
+
+Usage
+
+    Clone the repository:
+
+    bash
+
+git clone <repository-url>
+cd <repository-directory>
+
+Ensure that all the software dependencies are installed and accessible in your PATH.
+
+Edit the script to set the appropriate paths for your environment if necessary.
+
+Run the script:
+
+bash
+
+    bash RNASeq_Pipeline.sh
+
+Output
+
+    Output Directory: The script creates an Out_Analysis directory containing:
+        QC reports
+        Trimmed reads
+        Alignment files (SAM and BAM)
+        Count matrix (Count_matrix.txt)
+        Sample information file (Sample_Info.txt)
+    Differential Expression Results: The script calls an R script (DESeq2.r) for further analysis of the count data.
+
+Contribution
+
+Contributions are welcome! Please open an issue or submit a pull request if you would like to add features or fix bugs.
